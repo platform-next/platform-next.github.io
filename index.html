@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="PlatformNext Dashboard">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="PlatformNext Website">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.ico"/>
+  <title>PlatformNext Website</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script>
+    const serviceWorkerVersion = "3303575168";
+  </script>
+  <script src="flutter.js" defer></script>
+</head>
+<body>
+<div id="dev_loading" style="margin: 0;height: 90vh;align-items: center;justify-content: center;display: flex;">
+<lottie-player src="loading.json" background="transparent"  speed="0.5"  style="width: 350px; height: 350px;" loop autoplay></lottie-player>
+</div>
+  <script>
+    window.addEventListener('load', function(ev) {
+       var currentUrl = window.location.href;
+       if (!currentUrl.includes('localhost')) {
+            var script = document.createElement('script');
+            script.src = 'f12.js';
+            script.defer = true;
+            document.head.appendChild(script);
+       }
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            var loadingDiv = document.getElementById('dev_loading');
+            if (loadingDiv) {
+              loadingDiv.remove();
+            }
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
